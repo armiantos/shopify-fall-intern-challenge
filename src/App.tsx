@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Movie as MovieComponent } from './components/Movie';
 
-import { SearchResponse, Movie } from './data/OMDBTypes';
+import { SearchResponse, Movie, Type } from './data/OMDBTypes';
 
 import './App.css';
 
@@ -13,6 +13,7 @@ async function search(title: string): Promise<Movie[]> {
         params: {
             apikey: API_KEY,
             s: title,
+            type: Type.Movie,
         },
     });
 

@@ -47,6 +47,7 @@ export interface Movie {
 export enum Type {
     Movie = 'movie',
     Series = 'series',
+    Episode = 'episode',
 }
 
 export interface Headers {
