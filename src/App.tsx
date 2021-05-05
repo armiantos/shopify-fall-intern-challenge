@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Movie as MovieComponent } from './components/Movie';
 
 import { SearchResponse, Movie } from './data/OMDBTypes';
 
@@ -14,11 +15,17 @@ async function search(title: string): Promise<Movie[]> {
             s: title,
         },
     });
+
+    if (res.data.Search === undefined) {
+        return [];
+    }
+
     return res.data.Search;
 }
 
 function App() {
     const [title, setTitle] = useState('');
+    const [movies, setMovies] = useState<Movie[]>([]);
 
     return (
         <div className="App">
@@ -30,12 +37,17 @@ function App() {
                     value={title}
                     placeholder="Search movie title"
                     onChange={(e) => setTitle(e.target.value)}
-                    onKeyUp={(e) => {
+                    onKeyUp={async (e) => {
                         if (e.key === 'Enter') {
-                            search(title);
+                            setMovies(await search(title));
                         }
                     }}
                 />
+            </div>
+            <div className="SearchResults">
+                {movies.map((movie) => (
+                    <MovieComponent movieData={movie} />
+                ))}
             </div>
         </div>
     );
