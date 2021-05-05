@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+    const [search, updateSearch] = useState('');
+
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+            <div className="SearchBar">
+                <input
+                    type="text"
+                    id="search"
+                    name="search"
+                    value={search}
+                    placeholder="Search movie title"
+                    onChange={(e) => updateSearch(e.target.value)}
+                    onKeyUp={(e) => {
+                        if (e.key === 'Enter') {
+                            console.log(search);
+                            // TODO: perform search
+                        }
+                    }}
+                />
+            </div>
         </div>
     );
 }
