@@ -21,6 +21,8 @@ async function search(title: string): Promise<Movie[]> {
         return [];
     }
 
+    // TODO: Handle pagination
+
     return res.data.Search;
 }
 
