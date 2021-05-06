@@ -1,34 +1,29 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Movie as MovieComponent } from './components/Movie';
+import { Paginator } from './components/Paginator';
 
-import { SearchResponse, Movie, Type } from './data/OMDBTypes';
+import { SearchResponse, Type } from './data/OMDBTypes';
 
 import './App.css';
 
 const API_KEY = 'e287055f';
 
-async function search(title: string): Promise<Movie[]> {
-    let res: SearchResponse = await axios.get('http://www.omdbapi.com', {
+async function search(title: string): Promise<SearchResponse> {
+    return await axios.get('http://www.omdbapi.com', {
         params: {
             apikey: API_KEY,
             s: title,
             type: Type.Movie,
         },
     });
-
-    if (res.data.Search === undefined) {
-        return [];
-    }
-
-    // TODO: Handle pagination
-
-    return res.data.Search;
 }
 
 function App() {
     const [title, setTitle] = useState('');
-    const [movies, setMovies] = useState<Movie[]>([]);
+    const [lastSearch, setLastSearch] = useState<SearchResponse | undefined>(
+        undefined
+    );
 
     return (
         <div className="App">
@@ -42,16 +37,32 @@ function App() {
                     onChange={(e) => setTitle(e.target.value)}
                     onKeyUp={async (e) => {
                         if (e.key === 'Enter') {
-                            setMovies(await search(title));
+                            let results = await search(title);
+                            console.log(results);
+                            setLastSearch(results);
                         }
                     }}
                 />
             </div>
-            <div className="SearchResults">
-                {movies.map((movie) => (
-                    <MovieComponent movieData={movie} />
-                ))}
-            </div>
+            {lastSearch !== undefined && (
+                <>
+                    <Paginator
+                        onChangePage={(page) => {
+                            console.log(page);
+                        }}
+                        numPages={Math.round(
+                            +lastSearch.data.totalResults / 10
+                        )}
+                        currentPage={0} /* TODO */
+                    />
+                    <div className="SearchResults">
+                        {lastSearch.data.Search !== undefined &&
+                            lastSearch.data.Search.map((movie) => (
+                                <MovieComponent movieData={movie} />
+                            ))}
+                    </div>
+                </>
+            )}
         </div>
     );
 }
