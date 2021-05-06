@@ -45,7 +45,18 @@ export function Paginator({
                     .map((pageNumber) => (
                         <div
                             key={pageNumber}
-                            className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+                            className={`relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ${
+                                pageNumber === currentPage ? 'font-bold ' : ''
+                            } ${
+                                pageNumber === currentPage && currentPage === 1
+                                    ? 'rounded-l-md'
+                                    : ''
+                            } ${
+                                pageNumber === currentPage &&
+                                currentPage === numPages
+                                    ? 'rounded-r-md'
+                                    : ''
+                            }`}
                             onClick={(_) => onChangePage(pageNumber)}
                         >
                             {pageNumber}
