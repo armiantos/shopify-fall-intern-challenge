@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Movie as MovieComponent } from './components/Movie';
+import { Movie } from './components/Movie';
 import { Paginator } from './components/Paginator';
 
 import { SearchResponse, Type } from './data/OMDBTypes';
@@ -9,8 +9,11 @@ import './App.css';
 
 const API_KEY = 'e287055f';
 
-async function search(title: string, page: number): Promise<SearchResponse> {
-    return await axios.get('http://www.omdbapi.com', {
+async function search(
+    title: string,
+    page: number
+): Promise<SearchResponse | undefined> {
+    let resp: SearchResponse = await axios.get('http://www.omdbapi.com', {
         params: {
             apikey: API_KEY,
             s: title,
@@ -18,6 +21,12 @@ async function search(title: string, page: number): Promise<SearchResponse> {
             page,
         },
     });
+
+    if ('Error' in resp.data) {
+        return undefined;
+    }
+
+    return resp;
 }
 
 function App() {
@@ -60,11 +69,12 @@ function App() {
                     <div className="SearchResults">
                         {lastSearch.data.Search !== undefined &&
                             lastSearch.data.Search.map((movie) => (
-                                <MovieComponent movieData={movie} />
+                                <Movie key={movie.imdbID} movieData={movie} />
                             ))}
                     </div>
                 </>
             )}
+            {/* TODO: Handle no results found */}
         </div>
     );
 }
