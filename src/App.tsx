@@ -9,18 +9,20 @@ import './App.css';
 
 const API_KEY = 'e287055f';
 
-async function search(title: string): Promise<SearchResponse> {
+async function search(title: string, page: number): Promise<SearchResponse> {
     return await axios.get('http://www.omdbapi.com', {
         params: {
             apikey: API_KEY,
             s: title,
             type: Type.Movie,
+            page,
         },
     });
 }
 
 function App() {
     const [title, setTitle] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
     const [lastSearch, setLastSearch] = useState<SearchResponse | undefined>(
         undefined
     );
@@ -37,9 +39,7 @@ function App() {
                     onChange={(e) => setTitle(e.target.value)}
                     onKeyUp={async (e) => {
                         if (e.key === 'Enter') {
-                            let results = await search(title);
-                            console.log(results);
-                            setLastSearch(results);
+                            setLastSearch(await search(title, currentPage));
                         }
                     }}
                 />
@@ -47,13 +47,15 @@ function App() {
             {lastSearch !== undefined && (
                 <>
                     <Paginator
-                        onChangePage={(page) => {
+                        onChangePage={async (page) => {
                             console.log(page);
+                            setCurrentPage(page);
+                            setLastSearch(await search(title, page));
                         }}
                         numPages={Math.round(
                             +lastSearch.data.totalResults / 10
                         )}
-                        currentPage={0} /* TODO */
+                        currentPage={currentPage} /* TODO */
                     />
                     <div className="SearchResults">
                         {lastSearch.data.Search !== undefined &&
