@@ -37,44 +37,51 @@ function App() {
     );
 
     return (
-        <div className="App">
-            <div className="SearchBar">
-                <input
-                    type="text"
-                    id="search"
-                    name="search"
-                    value={title}
-                    placeholder="Search movie title"
-                    onChange={(e) => setTitle(e.target.value)}
-                    onKeyUp={async (e) => {
-                        if (e.key === 'Enter') {
-                            setLastSearch(await search(title, currentPage));
-                        }
-                    }}
-                />
-            </div>
-            {lastSearch !== undefined && (
-                <>
-                    <Paginator
-                        onChangePage={async (page) => {
-                            console.log(page);
-                            setCurrentPage(page);
-                            setLastSearch(await search(title, page));
+        <div className="App mx-auto bg-gray-100 grid place-items-center">
+            <div className="container md">
+                <div className="SearchBar">
+                    <input
+                        type="text"
+                        id="search"
+                        name="search"
+                        className="rounded-lg p-4"
+                        value={title}
+                        placeholder="Search movie title"
+                        onChange={(e) => setTitle(e.target.value)}
+                        onKeyUp={async (e) => {
+                            if (e.key === 'Enter') {
+                                setLastSearch(await search(title, currentPage));
+                            }
                         }}
-                        numPages={Math.round(
-                            +lastSearch.data.totalResults / 10
-                        )}
-                        currentPage={currentPage} /* TODO */
                     />
-                    <div className="SearchResults">
-                        {lastSearch.data.Search !== undefined &&
-                            lastSearch.data.Search.map((movie) => (
-                                <Movie key={movie.imdbID} movieData={movie} />
-                            ))}
-                    </div>
-                </>
-            )}
-            {/* TODO: Handle no results found */}
+                </div>
+                {lastSearch !== undefined && (
+                    <>
+                        <div className="SearchResults grid grid-cols-5 gap-4 m-4">
+                            {lastSearch.data.Search !== undefined &&
+                                lastSearch.data.Search.map((movie) => (
+                                    <Movie
+                                        key={movie.imdbID}
+                                        movieData={movie}
+                                    />
+                                ))}
+                        </div>
+
+                        <Paginator
+                            onChangePage={async (page) => {
+                                console.log(page);
+                                setCurrentPage(page);
+                                setLastSearch(await search(title, page));
+                            }}
+                            numPages={Math.round(
+                                +lastSearch.data.totalResults / 10
+                            )}
+                            currentPage={currentPage} /* TODO */
+                        />
+                    </>
+                )}
+                {/* TODO: Handle no results found */}
+            </div>
         </div>
     );
 }

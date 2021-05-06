@@ -13,7 +13,7 @@ export function Paginator({
     onChangePage,
 }: PaginatorProps) {
     return (
-        <div>
+        <div className="m-4">
             <nav
                 className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
                 aria-label="Pagination"
