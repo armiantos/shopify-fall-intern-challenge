@@ -44,7 +44,7 @@ function App() {
                         type="text"
                         id="search"
                         name="search"
-                        className="rounded-lg p-4"
+                        className="rounded-lg p-4 border-gray-300 hover:shadow-md transition-all"
                         value={title}
                         placeholder="Search movie title"
                         onChange={(e) => setTitle(e.target.value)}
