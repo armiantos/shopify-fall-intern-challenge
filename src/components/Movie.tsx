@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Movie as MovieData } from '../data/OMDBTypes';
 
 export interface MovieProps {
@@ -16,7 +16,25 @@ function Poster({ posterLink: link, alt }: PosterProps) {
     if (link === 'N/A') {
         // TODO: Replace with svg
         posterImage = (
-            <div className="Placeholder bg-gray-300 w-full h-full"></div>
+            <svg
+                width="100%"
+                viewBox="0 0 648 960"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <rect width="648" height="960" fill="#E5E5E5" />
+                <rect x="195" y="420" width="257" height="128" fill="#C9C9C9" />
+                <rect x="195" y="389" width="257" height="20" fill="#C9C9C9" />
+                <rect x="209" y="364" width="44" height="21" fill="#C9C9C9" />
+                <circle
+                    cx="351.5"
+                    cy="484.5"
+                    r="43.5"
+                    fill="#C9C9C9"
+                    stroke="#E5E5E5"
+                    strokeWidth="14"
+                />
+            </svg>
         );
     }
 
@@ -27,7 +45,10 @@ function Poster({ posterLink: link, alt }: PosterProps) {
     );
 }
 
-export function Movie({ movieData }: MovieProps) {
+export const Movie: FunctionComponent<MovieProps> = ({
+    movieData,
+    children,
+}) => {
     return (
         <div className="Movie rounded-lg shadow-sm bg-white flex flex-col justify-center items-center p-4">
             <Poster
@@ -36,6 +57,7 @@ export function Movie({ movieData }: MovieProps) {
             />
             <h3>{movieData.Title}</h3>
             <h4>{movieData.Year}</h4>
+            {children}
         </div>
     );
-}
+};
