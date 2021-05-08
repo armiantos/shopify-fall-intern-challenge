@@ -16,7 +16,25 @@ function Poster({ posterLink: link, alt }: PosterProps) {
     if (link === 'N/A') {
         // TODO: Replace with svg
         posterImage = (
-            <div className="Placeholder bg-gray-300 w-full h-full"></div>
+            <svg
+                width="100%"
+                viewBox="0 0 648 960"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <rect width="648" height="960" fill="#C9C9C9" />
+                <rect x="195" y="420" width="257" height="128" fill="#9B9B9B" />
+                <rect x="195" y="389" width="257" height="20" fill="#9B9B9B" />
+                <rect x="209" y="364" width="44" height="21" fill="#9B9B9B" />
+                <circle
+                    cx="351.5"
+                    cy="484.5"
+                    r="43.5"
+                    fill="#9B9B9B"
+                    stroke="#C9C9C9"
+                    stroke-width="14"
+                />
+            </svg>
         );
     }
 
