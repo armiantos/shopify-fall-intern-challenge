@@ -32,7 +32,7 @@ async function search(
 
 function App() {
     const [currentPage, setCurrentPage] = useState(1);
-    const [movies, setMovies] = useState<Movie[]>([]);
+    const [nominees, setNominees] = useState<Movie[]>([]);
     const [lastSearch, setLastSearch] = useState<SearchResponse | undefined>(
         undefined
     );
@@ -42,14 +42,14 @@ function App() {
             <div className="container lg:md mx-auto">
                 <h1 className="text-5xl ">The Shoppies</h1>
 
-                <h1 className="text-4xl ">My nominees</h1>
+                <h1 className="text-4xl text-green-600">My nominees</h1>
                 <div className="SearchResults grid grid-cols-2 lg:grid-cols-5 gap-4">
-                    {movies.map((movie) => (
+                    {nominees.map((movie) => (
                         <MovieComponent key={movie.imdbID} movieData={movie} />
                     ))}
                 </div>
 
-                <h1 className="text-4xl ">Search</h1>
+                <h1 className="text-4xl text-green-600">Search</h1>
                 <SearchBar
                     onEnter={async (title) => {
                         setLastSearch(await search(title, currentPage));
@@ -63,7 +63,19 @@ function App() {
                                     <MovieComponent
                                         key={movie.imdbID}
                                         movieData={movie}
-                                    />
+                                    >
+                                        <button
+                                            className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all"
+                                            onClick={(_) =>
+                                                setNominees([
+                                                    ...nominees,
+                                                    movie,
+                                                ])
+                                            }
+                                        >
+                                            Nominate
+                                        </button>
+                                    </MovieComponent>
                                 ))}
                         </div>
 
