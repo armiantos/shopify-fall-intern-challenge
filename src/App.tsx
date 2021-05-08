@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Movie } from './components/Movie';
 import { Paginator } from './components/Paginator';
+import { SearchBar } from './components/SearchBar';
 
 import { SearchResponse, Type } from './data/OMDBTypes';
 
@@ -30,7 +31,6 @@ async function search(
 }
 
 function App() {
-    const [title, setTitle] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [lastSearch, setLastSearch] = useState<SearchResponse | undefined>(
         undefined
@@ -39,22 +39,11 @@ function App() {
     return (
         <div className="App">
             <div className="container lg:md mx-auto">
-                <div className="SearchBar">
-                    <input
-                        type="text"
-                        id="search"
-                        name="search"
-                        className="rounded-lg p-4 m-4 border-gray-300 hover:shadow-md transition-all"
-                        value={title}
-                        placeholder="Search movie title"
-                        onChange={(e) => setTitle(e.target.value)}
-                        onKeyUp={async (e) => {
-                            if (e.key === 'Enter') {
-                                setLastSearch(await search(title, currentPage));
-                            }
-                        }}
-                    />
-                </div>
+                <SearchBar
+                    onEnter={async (title) => {
+                        setLastSearch(await search(title, currentPage));
+                    }}
+                />
                 {lastSearch !== undefined && (
                     <>
                         <div className="SearchResults grid grid-cols-2 lg:grid-cols-5 gap-4 m-4">
@@ -71,7 +60,12 @@ function App() {
                             onChangePage={async (page) => {
                                 console.log(page);
                                 setCurrentPage(page);
-                                setLastSearch(await search(title, page));
+                                setLastSearch(
+                                    await search(
+                                        lastSearch.config.params.s,
+                                        page
+                                    )
+                                );
                             }}
                             numPages={Math.round(
                                 +lastSearch.data.totalResults / 10
