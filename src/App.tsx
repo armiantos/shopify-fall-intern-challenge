@@ -43,11 +43,11 @@ function App() {
                 <h1 className="text-5xl ">The Shoppies</h1>
 
                 <h1 className="text-4xl text-green-600">My nominees</h1>
-                <div className="SearchResults grid grid-cols-2 lg:grid-cols-5 gap-4">
+                <div className="Nominees grid grid-cols-2 lg:grid-cols-5 gap-4">
                     {nominees.map((movie) => (
                         <MovieComponent key={movie.imdbID} movieData={movie}>
                             <button
-                                className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all"
+                                className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all"
                                 onClick={(_) => {
                                     setNominees(
                                         nominees.filter(
@@ -78,13 +78,15 @@ function App() {
                                         movieData={movie}
                                     >
                                         <button
-                                            className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all"
+                                            className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all disabled:opacity-50 disabled:hover:bg-green-600"
+                                            disabled={nominees.includes(movie)}
                                             onClick={(_) =>
                                                 setNominees([
                                                     ...nominees,
                                                     movie,
                                                 ])
                                             }
+                                            // TODO: Hovering on disabled button still highlights the button
                                         >
                                             Nominate
                                         </button>
