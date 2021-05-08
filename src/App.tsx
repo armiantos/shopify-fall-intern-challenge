@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Movie } from './components/Movie';
+import { Movie as MovieComponent } from './components/Movie';
 import { Paginator } from './components/Paginator';
 import { SearchBar } from './components/SearchBar';
 
-import { SearchResponse, Type } from './data/OMDBTypes';
+import { SearchResponse, Type, Movie } from './data/OMDBTypes';
 
 import './App.css';
 
@@ -32,6 +32,7 @@ async function search(
 
 function App() {
     const [currentPage, setCurrentPage] = useState(1);
+    const [movies, setMovies] = useState<Movie[]>([]);
     const [lastSearch, setLastSearch] = useState<SearchResponse | undefined>(
         undefined
     );
@@ -39,6 +40,16 @@ function App() {
     return (
         <div className="App">
             <div className="container lg:md mx-auto">
+                <h1 className="text-5xl ">The Shoppies</h1>
+
+                <h1 className="text-4xl ">My nominees</h1>
+                <div className="SearchResults grid grid-cols-2 lg:grid-cols-5 gap-4">
+                    {movies.map((movie) => (
+                        <MovieComponent key={movie.imdbID} movieData={movie} />
+                    ))}
+                </div>
+
+                <h1 className="text-4xl ">Search</h1>
                 <SearchBar
                     onEnter={async (title) => {
                         setLastSearch(await search(title, currentPage));
@@ -46,10 +57,10 @@ function App() {
                 />
                 {lastSearch !== undefined && (
                     <>
-                        <div className="SearchResults grid grid-cols-2 lg:grid-cols-5 gap-4 m-4">
+                        <div className="SearchResults grid grid-cols-2 lg:grid-cols-5 gap-4">
                             {lastSearch.data.Search !== undefined &&
                                 lastSearch.data.Search.map((movie) => (
-                                    <Movie
+                                    <MovieComponent
                                         key={movie.imdbID}
                                         movieData={movie}
                                     />
@@ -73,7 +84,6 @@ function App() {
                         />
                     </>
                 )}
-                {/* TODO: Handle no results found */}
             </div>
         </div>
     );
