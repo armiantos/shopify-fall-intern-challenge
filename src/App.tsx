@@ -45,7 +45,20 @@ function App() {
                 <h1 className="text-4xl text-green-600">My nominees</h1>
                 <div className="SearchResults grid grid-cols-2 lg:grid-cols-5 gap-4">
                     {nominees.map((movie) => (
-                        <MovieComponent key={movie.imdbID} movieData={movie} />
+                        <MovieComponent key={movie.imdbID} movieData={movie}>
+                            <button
+                                className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all"
+                                onClick={(_) => {
+                                    setNominees(
+                                        nominees.filter(
+                                            (nominee) => nominee !== movie
+                                        )
+                                    );
+                                }}
+                            >
+                                Remove
+                            </button>
+                        </MovieComponent>
                     ))}
                 </div>
 
