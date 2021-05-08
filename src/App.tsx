@@ -40,9 +40,11 @@ function App() {
     return (
         <div className="App">
             <div className="container lg:md mx-auto">
-                <h1 className="text-5xl ">The Shoppies</h1>
+                <h1 className="text-5xl mt-2 mb-6">The Shoppies</h1>
 
-                <h1 className="text-4xl text-green-600">My nominees</h1>
+                <h1 className="text-4xl text-green-600 mt-2 mb-6">
+                    My nominees
+                </h1>
                 <div className="Nominees grid grid-cols-2 lg:grid-cols-5 gap-4">
                     {nominees.map((movie) => (
                         <MovieComponent key={movie.imdbID} movieData={movie}>
@@ -51,7 +53,8 @@ function App() {
                                 onClick={(_) => {
                                     setNominees(
                                         nominees.filter(
-                                            (nominee) => nominee !== movie
+                                            (nominee) =>
+                                                nominee.imdbID !== movie.imdbID
                                         )
                                     );
                                 }}
@@ -62,7 +65,7 @@ function App() {
                     ))}
                 </div>
 
-                <h1 className="text-4xl text-green-600">Search</h1>
+                <h1 className="text-4xl text-green-600 mt-2 mb-6">Search</h1>
                 <SearchBar
                     onEnter={async (title) => {
                         setLastSearch(await search(title, currentPage));
@@ -79,7 +82,13 @@ function App() {
                                     >
                                         <button
                                             className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all disabled:opacity-50 disabled:hover:bg-green-600"
-                                            disabled={nominees.includes(movie)}
+                                            disabled={
+                                                nominees.findIndex(
+                                                    (nominee) =>
+                                                        nominee.imdbID ===
+                                                        movie.imdbID
+                                                ) >= 0
+                                            }
                                             onClick={(_) =>
                                                 setNominees([
                                                     ...nominees,
