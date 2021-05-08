@@ -20,7 +20,7 @@ export function Paginator({
             >
                 {currentPage > 1 && (
                     <div
-                        className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all"
+                        className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all cursor-pointer"
                         onClick={(_) => onChangePage(currentPage - 1)}
                     >
                         <span className="sr-only">Previous</span>
@@ -45,7 +45,7 @@ export function Paginator({
                     .map((pageNumber) => (
                         <div
                             key={pageNumber}
-                            className={`relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium  hover:bg-gray-50 transition-all ${
+                            className={`relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium  hover:bg-gray-50 transition-all cursor-pointer ${
                                 pageNumber === currentPage
                                     ? 'font-bold text-gray-700'
                                     : 'text-gray-500'
@@ -67,7 +67,7 @@ export function Paginator({
 
                 {currentPage < numPages && (
                     <div
-                        className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all"
+                        className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all cursor-pointer"
                         onClick={(_) => onChangePage(currentPage + 1)}
                     >
                         <span className="sr-only">Next</span>

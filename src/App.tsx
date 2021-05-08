@@ -58,7 +58,6 @@ function App() {
 
                         <Paginator
                             onChangePage={async (page) => {
-                                console.log(page);
                                 setCurrentPage(page);
                                 setLastSearch(
                                     await search(
