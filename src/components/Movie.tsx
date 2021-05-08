@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Movie as MovieData } from '../data/OMDBTypes';
 
 export interface MovieProps {
@@ -45,7 +45,10 @@ function Poster({ posterLink: link, alt }: PosterProps) {
     );
 }
 
-export function Movie({ movieData }: MovieProps) {
+export const Movie: FunctionComponent<MovieProps> = ({
+    movieData,
+    children,
+}) => {
     return (
         <div className="Movie rounded-lg shadow-sm bg-white flex flex-col justify-center items-center p-4">
             <Poster
@@ -54,6 +57,7 @@ export function Movie({ movieData }: MovieProps) {
             />
             <h3>{movieData.Title}</h3>
             <h4>{movieData.Year}</h4>
+            {children}
         </div>
     );
-}
+};
