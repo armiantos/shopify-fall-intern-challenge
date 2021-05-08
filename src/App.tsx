@@ -57,7 +57,7 @@ function App() {
                 </div>
                 {lastSearch !== undefined && (
                     <>
-                        <div className="SearchResults grid grid-cols-5 gap-4 m-4">
+                        <div className="SearchResults grid grid-cols-2 lg:grid-cols-5 gap-4 m-4">
                             {lastSearch.data.Search !== undefined &&
                                 lastSearch.data.Search.map((movie) => (
                                     <Movie
