@@ -37,14 +37,14 @@ function App() {
     );
 
     return (
-        <div className="App mx-auto bg-gray-100 grid place-items-center">
-            <div className="container md">
+        <div className="App">
+            <div className="container lg:md mx-auto">
                 <div className="SearchBar">
                     <input
                         type="text"
                         id="search"
                         name="search"
-                        className="rounded-lg p-4 border-gray-300 hover:shadow-md transition-all"
+                        className="rounded-lg p-4 m-4 border-gray-300 hover:shadow-md transition-all"
                         value={title}
                         placeholder="Search movie title"
                         onChange={(e) => setTitle(e.target.value)}
