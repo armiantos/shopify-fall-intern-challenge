@@ -7,17 +7,10 @@ export interface PaginatorProps {
 }
 
 // Adapted from https://tailwindui.com/components/application-ui/navigation/pagination
-export function Paginator({
-    currentPage,
-    numPages,
-    onChangePage,
-}: PaginatorProps) {
+export function Paginator({ currentPage, numPages, onChangePage }: PaginatorProps) {
     return (
         <div className="m-4">
-            <nav
-                className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
-                aria-label="Pagination"
-            >
+            <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
                 {currentPage > 1 && (
                     <div
                         className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all cursor-pointer"
@@ -46,18 +39,9 @@ export function Paginator({
                         <div
                             key={pageNumber}
                             className={`relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium  hover:bg-gray-50 transition-all cursor-pointer ${
-                                pageNumber === currentPage
-                                    ? 'font-bold text-gray-700'
-                                    : 'text-gray-500'
-                            } ${
-                                pageNumber === currentPage && currentPage === 1
-                                    ? 'rounded-l-md'
-                                    : ''
-                            } ${
-                                pageNumber === currentPage &&
-                                currentPage === numPages
-                                    ? 'rounded-r-md'
-                                    : ''
+                                pageNumber === currentPage ? 'font-bold text-gray-700' : 'text-gray-500'
+                            } ${pageNumber === currentPage && currentPage === 1 ? 'rounded-l-md' : ''} ${
+                                pageNumber === currentPage && currentPage === numPages ? 'rounded-r-md' : ''
                             }`}
                             onClick={(_) => onChangePage(pageNumber)}
                         >
