@@ -11,7 +11,7 @@ interface PosterProps {
 }
 
 function Poster({ posterLink: link, alt }: PosterProps) {
-    let posterImage = <img src={link} alt={alt} />;
+    let posterImage = <img className="object-cover" src={link} alt={alt} />;
 
     if (link === 'N/A') {
         // TODO: Replace with svg
@@ -39,7 +39,7 @@ function Poster({ posterLink: link, alt }: PosterProps) {
     }
 
     return (
-        <div className="Poster flex-grow grid place-items-center m-4 w-full h-full">
+        <div className="Poster flex-grow grid place-items-center m-4 w-full h-full aspect-w-11 aspect-h-16">
             {posterImage}
         </div>
     );
