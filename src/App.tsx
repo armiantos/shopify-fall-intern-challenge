@@ -54,42 +54,42 @@ function App() {
     return (
         <div className="App">
             <Banner display={isBannerVisible}>
-                <h2 className="text-5xl mt-4 mb-8 font-bold text-green-800">Congratulations!</h2>
-                <p>You have nominated the following 5 movies!</p>
+                <h2 className="text-5xl mt-4 mb-8 font-bold text-green-800">Here are your nominees!</h2>
+                <p>
+                    You have nominated the following 5 movies! Press <i>Submit</i> to submit your vote or cancel to modify your nominees
+                </p>
                 <div className="FinalNominees grid grid-cols-2 lg:grid-cols-5 gap-4 m-4">
                     {nominees.map((movie) => (
                         <MovieComponent key={movie.imdbID} movieData={movie} />
                     ))}
                 </div>
-                <button
-                    className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all"
-                    onClick={(_) => {
-                        setBannerVisibility(false);
-                    }}
-                >
-                    Close
-                </button>
+                <div className="flex flex-row justify-center">
+                    <button
+                        className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all"
+                        onClick={(_) => {
+                            setBannerVisibility(false);
+                        }}
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all"
+                        onClick={(_) => {
+                            setBannerVisibility(false); // Dummy implementation, this should post the results to an endpoint
+                        }}
+                    >
+                        Submit
+                    </button>
+                </div>
             </Banner>
 
-            <div className="container lg:md mx-auto">
-                <h1 className="text-5xl pt-4 pb-8 font-bold text-green-800">The Shoppies</h1>
-
-                <h2 className="text-4xl text-green-600 mt-4 mb-6 font-medium">My nominees</h2>
-                {nominees.length === 0 && <p>You have not nominated any movies</p>}
-                <div className="Nominees grid grid-cols-2 lg:grid-cols-5 gap-4">
-                    {nominees.map((movie) => (
-                        <MovieComponent key={movie.imdbID} movieData={movie}>
-                            <button
-                                className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all"
-                                onClick={(_) => {
-                                    setNominees(nominees.filter((nominee) => nominee.imdbID !== movie.imdbID));
-                                }}
-                            >
-                                Remove
-                            </button>
-                        </MovieComponent>
-                    ))}
-                </div>
+            <div className="container lg:md mx-auto mb-16">
+                <h1 className="text-5xl pt-16 pb-8 font-bold text-green-800">The Shoppies</h1>
+                <h4 className="text-lg mt-2 mb-4">Nominate your favourite movies for the Shoppies!</h4>
+                <p>
+                    You can nominate {MAX_NOMINEES} movies using our search engine below. You can also modify your nominees in the{' '}
+                    <i>My nominees</i> section
+                </p>
 
                 <h2 className="text-4xl text-green-600 mt-4 mb-6 font-medium">Search</h2>
                 <SearchBar
@@ -125,6 +125,23 @@ function App() {
                     </>
                 )}
                 {lastSearch === undefined && <p>Sorry we could not find any movies with the given title</p>}
+
+                <h2 className="text-4xl text-green-600 mt-4 mb-6 font-medium">My nominees</h2>
+                {nominees.length === 0 && <p>You have not nominated any movies</p>}
+                <div className="Nominees grid grid-cols-2 lg:grid-cols-5 gap-4">
+                    {nominees.map((movie) => (
+                        <MovieComponent key={movie.imdbID} movieData={movie}>
+                            <button
+                                className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all"
+                                onClick={(_) => {
+                                    setNominees(nominees.filter((nominee) => nominee.imdbID !== movie.imdbID));
+                                }}
+                            >
+                                Remove
+                            </button>
+                        </MovieComponent>
+                    ))}
+                </div>
             </div>
         </div>
     );
