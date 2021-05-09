@@ -95,7 +95,9 @@ function App() {
                 <h2 className="text-4xl text-green-600 mt-8 mb-6 font-medium">Search</h2>
                 <SearchBar
                     onEnter={async (title) => {
-                        setLastSearch(await search(title, currentPage));
+                        // If the user enters a new search always default to page 1 (because a page 2 for the new title may not exist)
+                        setCurrentPage(1);
+                        setLastSearch(await search(title, 1));
                     }}
                 />
                 {lastSearch !== undefined && (
