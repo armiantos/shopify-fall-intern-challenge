@@ -76,7 +76,7 @@ function App() {
                     <button
                         className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all"
                         onClick={(_) => {
-                            setBannerVisibility(false); // Dummy implementation, this should post the results to an endpoint
+                            window.location.reload(); // Dummy implementation, this should post the result to an endpoint
                         }}
                     >
                         Submit
