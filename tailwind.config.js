@@ -8,6 +8,8 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
+            backgroundColor: ['disabled'],
+            cursor: ['disabled'],
         },
     },
     plugins: [require('@tailwindcss/aspect-ratio')],
