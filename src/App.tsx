@@ -13,6 +13,8 @@ import { Banner } from './components/Banner';
 const API_KEY = 'e287055f';
 const RESULTS_PER_PAGE = 10;
 
+const MAX_NOMINEES = 5;
+
 /**
  * Requests OMDB for movie details given its title. Undefined is returned if no movies with given title was found.
  *
@@ -44,7 +46,7 @@ function App() {
     const [isBannerVisible, setBannerVisibility] = useState(false);
 
     useEffect(() => {
-        if (nominees.length === 5) {
+        if (nominees.length === MAX_NOMINEES) {
             setBannerVisibility(true);
         }
     }, [setBannerVisibility, nominees]);
@@ -104,7 +106,7 @@ function App() {
                                         <button
                                             className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all disabled:opacity-50 disabled:bg-green-600 disabled:cursor-not-allowed"
                                             disabled={nominees.findIndex((nominee) => nominee.imdbID === movie.imdbID) >= 0}
-                                            onClick={(_) => setNominees([...nominees, movie])}
+                                            onClick={(_) => nominees.length < MAX_NOMINEES && setNominees([...nominees, movie])}
                                         >
                                             Nominate
                                         </button>
