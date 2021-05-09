@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/shopify-fall-intern-challenge/static/css/main.0b1a058b.chunk.css",
+    "main.js": "/shopify-fall-intern-challenge/static/js/main.be7ec8a6.chunk.js",
+    "main.js.map": "/shopify-fall-intern-challenge/static/js/main.be7ec8a6.chunk.js.map",
+    "runtime-main.js": "/shopify-fall-intern-challenge/static/js/runtime-main.36e43987.js",
+    "runtime-main.js.map": "/shopify-fall-intern-challenge/static/js/runtime-main.36e43987.js.map",
+    "static/js/2.d7ad40ed.chunk.js": "/shopify-fall-intern-challenge/static/js/2.d7ad40ed.chunk.js",
+    "static/js/2.d7ad40ed.chunk.js.map": "/shopify-fall-intern-challenge/static/js/2.d7ad40ed.chunk.js.map",
+    "static/js/3.e999168a.chunk.js": "/shopify-fall-intern-challenge/static/js/3.e999168a.chunk.js",
+    "static/js/3.e999168a.chunk.js.map": "/shopify-fall-intern-challenge/static/js/3.e999168a.chunk.js.map",
+    "index.html": "/shopify-fall-intern-challenge/index.html",
+    "static/css/main.0b1a058b.chunk.css.map": "/shopify-fall-intern-challenge/static/css/main.0b1a058b.chunk.css.map",
+    "static/js/2.d7ad40ed.chunk.js.LICENSE.txt": "/shopify-fall-intern-challenge/static/js/2.d7ad40ed.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.36e43987.js",
+    "static/js/2.d7ad40ed.chunk.js",
+    "static/css/main.0b1a058b.chunk.css",
+    "static/js/main.be7ec8a6.chunk.js"
+  ]
+}
