@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Movie as MovieComponent } from './components/Movie';
 import { Paginator } from './components/Paginator';
@@ -7,6 +7,7 @@ import { SearchBar } from './components/SearchBar';
 import { SearchResponse, Type, Movie } from './data/OMDBTypes';
 
 import './App.css';
+import { Banner } from './components/Banner';
 
 // OMDB constants
 const API_KEY = 'e287055f';
@@ -40,11 +41,36 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [nominees, setNominees] = useState<Movie[]>([]);
     const [lastSearch, setLastSearch] = useState<SearchResponse | undefined>(undefined);
+    const [isBannerVisible, setBannerVisibility] = useState(false);
+
+    useEffect(() => {
+        if (nominees.length === 5) {
+            setBannerVisibility(true);
+        }
+    }, [setBannerVisibility, nominees]);
 
     return (
         <div className="App">
+            <Banner display={isBannerVisible}>
+                <h2 className="text-5xl mt-4 mb-8 font-bold text-green-800">Congratulations!</h2>
+                <p>You have nominated the following 5 movies!</p>
+                <div className="FinalNominees grid grid-cols-2 lg:grid-cols-5 gap-4 m-4">
+                    {nominees.map((movie) => (
+                        <MovieComponent key={movie.imdbID} movieData={movie} />
+                    ))}
+                </div>
+                <button
+                    className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 m-2 rounded shadow-sm hover:shadow-md transition-all"
+                    onClick={(_) => {
+                        setBannerVisibility(false);
+                    }}
+                >
+                    Close
+                </button>
+            </Banner>
+
             <div className="container lg:md mx-auto">
-                <h1 className="text-5xl mt-4 mb-8 font-bold text-green-800">The Shoppies</h1>
+                <h1 className="text-5xl pt-4 pb-8 font-bold text-green-800">The Shoppies</h1>
 
                 <h2 className="text-4xl text-green-600 mt-4 mb-6 font-medium">My nominees</h2>
                 {nominees.length === 0 && <p>You have not nominated any movies</p>}
