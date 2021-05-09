@@ -9,3 +9,4 @@ The difference between this and my last attempt was:
 - I chose to not use Redux to simplify the code (and hence I also did not have persistence)
 - I updated the UI to something more appealing and made it responsive (especially to smaller devices)
 - Made sure everything was 100% accessible through the keyboard
+- Did not set-up Github Actions for this repository
