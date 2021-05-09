@@ -56,7 +56,8 @@ function App() {
             <Banner display={isBannerVisible}>
                 <h2 className="text-5xl mt-4 mb-8 font-bold text-green-800">Here are your nominees!</h2>
                 <p>
-                    You have nominated the following 5 movies! Press <i>Submit</i> to submit your vote or cancel to modify your nominees
+                    You have nominated the following 5 movies! Please double check your nominees below and choose <i>Cancel</i> or{' '}
+                    <i>Submit</i>
                 </p>
                 <div className="FinalNominees grid grid-cols-2 lg:grid-cols-5 gap-4 m-4">
                     {nominees.map((movie) => (
@@ -84,14 +85,14 @@ function App() {
             </Banner>
 
             <div className="container lg:md mx-auto mb-16">
-                <h1 className="text-5xl pt-16 pb-8 font-bold text-green-800">The Shoppies</h1>
-                <h4 className="text-lg mt-2 mb-4">Nominate your favourite movies for the Shoppies!</h4>
-                <p>
+                <h1 className="text-5xl pt-16 pb-8 font-bold text-green-800">The Shoppies 🏆</h1>
+                <h4 className="text-lg mt-2 mb-4 text-gray-600">Nominate your favourite movies for the Shoppies!</h4>
+                <p className="text-gray-600">
                     You can nominate {MAX_NOMINEES} movies using our search engine below. You can also modify your nominees in the{' '}
                     <i>My nominees</i> section
                 </p>
 
-                <h2 className="text-4xl text-green-600 mt-4 mb-6 font-medium">Search</h2>
+                <h2 className="text-4xl text-green-600 mt-8 mb-6 font-medium">Search</h2>
                 <SearchBar
                     onEnter={async (title) => {
                         setLastSearch(await search(title, currentPage));
@@ -126,7 +127,7 @@ function App() {
                 )}
                 {lastSearch === undefined && <p>Sorry we could not find any movies with the given title</p>}
 
-                <h2 className="text-4xl text-green-600 mt-4 mb-6 font-medium">My nominees</h2>
+                <h2 className="text-4xl text-green-600 mt-8 mb-6 font-medium">My nominees</h2>
                 {nominees.length === 0 && <p>You have not nominated any movies</p>}
                 <div className="Nominees grid grid-cols-2 lg:grid-cols-5 gap-4">
                     {nominees.map((movie) => (
