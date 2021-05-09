@@ -49,9 +49,11 @@ function App() {
     return (
         <div className="App">
             <div className="container lg:md mx-auto">
-                <h1 className="text-5xl mt-4 mb-8">The Shoppies</h1>
+                <h1 className="text-5xl mt-4 mb-8 font-bold text-green-800">
+                    The Shoppies
+                </h1>
 
-                <h2 className="text-4xl text-green-600 mt-4 mb-6">
+                <h2 className="text-4xl text-green-600 mt-4 mb-6 font-medium">
                     My nominees
                 </h2>
                 {nominees.length === 0 && (
@@ -77,7 +79,9 @@ function App() {
                     ))}
                 </div>
 
-                <h2 className="text-4xl text-green-600 mt-4 mb-6">Search</h2>
+                <h2 className="text-4xl text-green-600 mt-4 mb-6 font-medium">
+                    Search
+                </h2>
                 <SearchBar
                     onEnter={async (title) => {
                         setLastSearch(await search(title, currentPage));
