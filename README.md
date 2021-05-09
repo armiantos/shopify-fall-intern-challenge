@@ -2,10 +2,11 @@
 
 The Shoppies is Shopify's annual movie award. Each person can nominate for 5 movies. The movies are taken from OMDB. The 5 movies have to be unique. 
 
-Additional features that I decided to add are:
-- Improved UI (posters are displayed, search results are paged according to OMDB's API)
-
 Feel free to check-out my last attempt I made in Summer 2020 at [https://armiantos.github.io/shopify-frontend-summer-intern/](https://armiantos.github.io/shopify-frontend-summer-intern/).
 
-Most notable improvements are:
-- No longer using [Material UI](https://material-ui.com/) (I'm now using [TailwindCSS](https://tailwindcss.com/) because I wanted to diversify my front end frameworks/libraries)
+The difference between this and my last attempt was:
+- I am now using Tailwind CSS instead of MaterialUI because I wanted to learn a new front-end library/framework
+- I chose to not use Redux to simplify the code (and hence I also did not have persistence)
+- I updated the UI to something more appealing and made it responsive (especially to smaller devices)
+- Made sure everything was 100% accessible through the keyboard
+- Did not set-up Github Actions for this repository
