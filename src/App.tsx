@@ -23,7 +23,7 @@ const MAX_NOMINEES = 5;
  * @returns a SearchResponse (contains a list of titles, posters, and total number of results)
  */
 async function search(title: string, page: number): Promise<SearchResponse | undefined> {
-    let resp: SearchResponse = await axios.get('http://www.omdbapi.com', {
+    let resp: SearchResponse = await axios.get('https://www.omdbapi.com', {
         params: {
             apikey: API_KEY,
             s: title,
